@@ -1,0 +1,75 @@
+<app-preloader *ngIf="loadData"></app-preloader>
+
+<div class="reg-form" #mainForm>
+  <h2>Registration form</h2>
+
+  <div class="reg-form__dataBox" [formGroup]="userCreateForm">
+    <div class="reg-form__dataBox username">
+      <span class="username__prompt">Enter your <span>username</span>.<br>
+        Use uppercase or lowercase letters and numbers.<br>
+      Minimal length is <span appColorize>3</span> symbols</span>
+      <input type="text" id="username"
+             placeholder="Name" formControlName="userName"
+             minlength="3" pattern="[A-Za-z0-9]*"
+             [(ngModel)]="user.username">
+
+      <div class="error" *ngIf="_userName?.invalid && (_userName?.touched || _userName?.dirty)">
+        <span *ngIf="_userName?.errors?.required">*Required field</span>
+        <span *ngIf="!_userName?.errors?.pattern && _userName?.errors?.minlength">
+          *Min length is {{ _userName?.errors?.minlength.requiredLength | number }}</span>
+        <span *ngIf="_userName?.errors?.pattern">*Invalid symbols (only Latin or numbers)</span>
+      </div>
+      <div class="error" *ngIf="isName">
+        <span *ngIf="_userName?.untouched && !_userName?.dirty">*The field is empty</span>
+      </div>
+    </div>
+
+    <div class="reg-form__dataBox password">
+      <span class="password__prompt">Enter your <span>password</span>.<br>
+        Use uppercase or lowercase letters and numbers. <br>
+      Minimal length is <span appColorize>8</span> symbols</span>
+      <input type="text" id="password"
+             placeholder="Password" formControlName="userPassword"
+             minlength="8" pattern="[A-Za-z0-9]*"
+             [(ngModel)]="user.password">
+
+      <div class="error" *ngIf="_userPassword?.invalid && (_userPassword?.touched || _userPassword?.dirty)">
+        <span *ngIf="_userPassword?.errors?.required">*Required field</span>
+        <span *ngIf="!_userPassword?.errors?.pattern && _userPassword?.errors?.minlength">
+          *Min length is {{ _userPassword?.errors?.minlength.requiredLength | number }}</span>
+        <span *ngIf="_userPassword?.errors?.pattern">*Invalid symbols (only Latin or numbers)</span>
+      </div>
+      <div class="error" *ngIf="isPass">
+        <span *ngIf="_userPassword?.untouched && !_userPassword?.dirty">*The field is empty</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="reg-form__agreements">
+    <label for="privacy" #privacy>
+      <input type="checkbox" id="privacy"
+             [checked]="isAgreePrivacy"
+             (change)="isAgreePrivacy = !isAgreePrivacy">
+      Agree with <a href="/privacy">privacy policy</a>
+    </label>
+
+    <label for="checkAge" #age>
+      <input type="checkbox" id="checkAge"
+             [checked]="isAgreeAge"
+             (change)="isAgreeAge = !isAgreeAge">
+      I'm 18+
+    </label>
+  </div>
+
+  <div class="reg-form__submit">
+    <input type="submit" value="Submit"
+           id="submitBtn" (click)="checkUserInfo()">
+    <a href="/">Do you already have an account?</a>
+  </div>
+</div>
+
+<div class="warning" #warning>
+  <h4>Warning!</h4>
+  <label class="warning__status">{{ this.status }}</label>
+</div>

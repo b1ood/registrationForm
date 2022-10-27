@@ -1,0 +1,33 @@
+@mixin reset {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin centering {
+  margin: 0 auto;
+  width: max-content;
+  justify-content: space-evenly;
+}
+
+@mixin mainFont {
+  font: small-caps 16px "Ink Free";
+}
+
+@mixin prompt {
+  font: small-caps bold 14px "Ink Free";
+  text-transform: lowercase;
+  color: whitesmoke;
+}
+
+@mixin link {
+  color: #bb86fa;
+  text-decoration: none;
+  text-transform: uppercase;
+  font: small-caps bold 14px "Ink Free";
+
+  &:hover {
+    background-image: linear-gradient(90deg, #ffe600, #ff0000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

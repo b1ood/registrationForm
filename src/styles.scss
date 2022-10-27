@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import "src/assets/mixins";
+
+html{
+  background-image: url("/assets/images/bg.jpg");
+  background-repeat: no-repeat;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+h2{
+  text-align: center;
+  margin: 30px auto;
+  font: small-caps bold 36px/1 "Ink Free";
+  color: whitesmoke;
+}
+
+h4 {
+  margin: 10px auto;
+  font: small-caps bold 24px "Ink Free";
+  color: #ff4848;;
+}
+
+label {
+  @include mainFont;
+  text-transform: uppercase;
+}

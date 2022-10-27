@@ -1,18 +1,42 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {PrivacyComponent} from './components/privacy/privacy.component';
+import {RouterModule, Routes} from "@angular/router";
+import {LoginFormComponent} from './components/login-form/login-form.component';
+import {HttpClientModule} from "@angular/common/http";
+import {RegFormComponent} from './components/reg-form/reg-form.component';
+import {ColorizeDirective} from './directives/colorize.directive';
+import {PreloaderComponent} from './components/preloader/preloader.component';
+import {UserService} from "./components/login-form/userServise/user.service";
+
+const appRoutes: Routes = [
+  {path: '', component: LoginFormComponent},
+  {path: 'privacy', component: PrivacyComponent},
+  {path: 'registration', component: RegFormComponent}
+];
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PrivacyComponent,
+    LoginFormComponent,
+    RegFormComponent,
+    ColorizeDirective,
+    PreloaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

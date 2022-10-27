@@ -1,0 +1,58 @@
+<div class="form">
+  <h2>login form</h2>
+
+  <div class="form__dataBox" [formGroup]="userForm">
+    <div class="form__dataBox username">
+      <label for="username">Username</label>
+      <input type="text" id="username"
+             placeholder="Name" formControlName="userName"
+             minlength="3" pattern="[A-Za-z0-9]*"
+             [(ngModel)]="user.username">
+
+      <div class="error" *ngIf="_userName?.invalid && (_userName?.touched || _userName?.dirty)">
+        <span *ngIf="_userName?.errors?.required">*Required field</span>
+        <span *ngIf="!_userName?.errors?.pattern && _userName?.errors?.minlength">
+          *Min length is {{ _userName?.errors?.minlength.requiredLength | number}}</span>
+        <span *ngIf="_userName?.errors?.pattern">*Invalid symbols (only Latin or numbers)</span>
+      </div>
+      <div class="error" *ngIf="isName">
+        <span *ngIf="_userName?.untouched && !_userName?.dirty">*The field is empty</span>
+      </div>
+    </div>
+
+    <div class="form__dataBox password">
+      <label for="password">Password</label>
+      <input type="password" id="password" #password
+             placeholder="Password" formControlName="userPassword"
+             minlength="8" pattern="[A-Za-z0-9]*"
+             [(ngModel)]="user.password">
+
+      <button class="password__visibility" #showPassword
+              (click)="changePasswordInp()">Show
+      </button>
+
+      <div class="error" *ngIf="_userPassword?.invalid && (_userPassword?.touched || _userPassword?.dirty)">
+        <span *ngIf="_userPassword?.errors?.required">*Required field</span>
+        <span *ngIf="!_userPassword?.errors?.pattern && _userPassword?.errors?.minlength">
+          *Min length is {{ _userPassword?.errors?.minlength.requiredLength | number }}</span>
+        <span *ngIf="_userPassword?.errors?.pattern">*Invalid symbols (only Latin or numbers)</span>
+      </div>
+      <div class="error" *ngIf="isPass">
+        <span *ngIf="_userPassword?.untouched && !_userPassword?.dirty">*The field is empty</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form__submit">
+    <input type="submit" value="Submit"
+           id="submitBtn" (click)="checkValid()" >
+
+    <a href="/registration">Not a user?</a>
+  </div>
+
+</div>
+
+<div class="warning" #warning>
+  <h4>Warning!</h4>
+  <label class="warning__status">{{ this.status }}</label>
+</div>
