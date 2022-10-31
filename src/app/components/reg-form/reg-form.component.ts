@@ -83,24 +83,34 @@ export class RegFormComponent implements OnInit {
   checkUserInfo() {
     if (this._userName?.untouched) {
       this.isName = true;
-    } else if (this._userPassword?.untouched) {
+    }
+
+    if (this._userPassword?.untouched) {
       this.isPass = true;
-    } else if (!this.isAgreePrivacy) {
+    }
+
+    if (!this.isAgreePrivacy) {
       this.privacy.nativeElement.style.color = 'red';
       this.privacy.nativeElement.style.transition = '0.7s';
       setTimeout(() => {
         this.privacy.nativeElement.style.color = 'black';
         this.privacy.nativeElement.style.transition = '0.7s';
-      }, 1000)
-    } else if (!this.isAgreeAge) {
+      }, 1000);
+    }
+
+    if (!this.isAgreeAge) {
       this.age.nativeElement.style.color = 'red';
       this.age.nativeElement.style.transition = '0.7s';
       setTimeout(() => {
         this.age.nativeElement.style.color = 'black';
         this.age.nativeElement.style.transition = '0.7s';
-      }, 1000)
-    } else {
-      this.createUser(this.user);
+      }, 1000);
     }
+
+    if (!this._userName?.valid || !this._userPassword?.valid || !this.isAgreePrivacy || !this.isAgreeAge) {
+      return;
+    }
+
+    this.createUser(this.user);
   }
 }

@@ -22,6 +22,7 @@ export class LoginFormComponent implements OnInit, DoCheck {
   public isPass: boolean;
   private isReg: boolean;
   private pass: boolean;
+  public title = 'Warning!';
   public status: string;
 
   constructor(private formBuilder: FormBuilder,
@@ -38,12 +39,12 @@ export class LoginFormComponent implements OnInit, DoCheck {
           this.pass = data.body.pass;
 
           if (this.isReg && this.pass) {
-
+            location.href = '/'
           } else if (this.isReg && !this.pass) {
-            this.warning.nativeElement.style.top = '10px'
+            this.warning.nativeElement.style.top = '10px';
             this.status = 'This password is wrong. Try again';
             setTimeout(() => {
-              this.warning.nativeElement.style.top = '-100px'
+              this.warning.nativeElement.style.top = '-100px';
             }, 2500)
           }
         },
@@ -88,12 +89,13 @@ export class LoginFormComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
     if (localStorage.getItem('newUser') === 'true') {
       setTimeout(() => {
-        this.warning.nativeElement.style.top = '10px'
-        this.status = 'You have been successfully registered'
-      }, 200)
+        this.warning.nativeElement.style.top = '10px';
+        this.title = 'Congratulation!';
+        this.status = 'You have been successfully registered';
+      }, 200);
       setTimeout(() => {
         this.warning.nativeElement.style.top = '-100px';
-      }, 3000)
+      }, 3000);
     }
     localStorage.clear();
   }
@@ -104,7 +106,7 @@ export class LoginFormComponent implements OnInit, DoCheck {
       this.isShownButton.nativeElement.style.textDecoration = 'none';
     } else {
       this.passwordField.nativeElement.setAttribute('type', 'password');
-      this.isShownButton.nativeElement.style.textDecoration = 'line-through'
+      this.isShownButton.nativeElement.style.textDecoration = 'line-through';
     }
   }
 
@@ -119,7 +121,7 @@ export class LoginFormComponent implements OnInit, DoCheck {
     }
 
     if (!this._userName?.valid || !this._userPassword?.valid) {
-      return
+      return;
     }
     this.submit(this.user);
   }
