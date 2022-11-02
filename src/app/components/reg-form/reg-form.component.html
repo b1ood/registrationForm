@@ -1,6 +1,6 @@
 <app-preloader *ngIf="loadData"></app-preloader>
 
-<div class="reg-form" #mainForm>
+<div class="reg-form" [style.opacity]="mainFormOpacity">
   <h2>Registration form</h2>
 
   <div class="reg-form__dataBox" [formGroup]="userCreateForm">
@@ -47,14 +47,14 @@
   </div>
 
   <div class="reg-form__agreements">
-    <label for="privacy" #privacy>
+    <label for="privacy" [style.color]="privacyColor">
       <input type="checkbox" id="privacy"
              [checked]="isAgreePrivacy"
              (change)="isAgreePrivacy = !isAgreePrivacy">
-      Agree with <a href="/privacy">privacy policy</a>
+      Agree with <a routerLink="/privacy">privacy policy</a>
     </label>
 
-    <label for="checkAge" #age>
+    <label for="checkAge" [style.color]="ageColor">
       <input type="checkbox" id="checkAge"
              [checked]="isAgreeAge"
              (change)="isAgreeAge = !isAgreeAge">
@@ -65,11 +65,11 @@
   <div class="reg-form__submit">
     <input type="submit" value="Submit"
            id="submitBtn" (click)="checkUserInfo()">
-    <a href="/">Do you already have an account?</a>
+    <a routerLink="/">Do you already have an account?</a>
   </div>
 </div>
 
-<div class="warning" #warning>
-  <h4>Warning!</h4>
-  <label class="warning__status">{{ this.status }}</label>
+<div class="warning" [style.top]="warning">
+  <h4 [style.color]="titleColor">{{ this.title }}</h4>
+  <label class="warning__status" [style.color]="titleColor">{{ this.status }}</label>
 </div>

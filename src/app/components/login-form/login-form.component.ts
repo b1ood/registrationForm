@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DoCheck, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "./userServise/user.service";
 import {User} from "./userServise/user";
@@ -10,24 +10,31 @@ import {User} from "./userServise/user";
 })
 export class LoginFormComponent implements OnInit, DoCheck {
 
-  @ViewChild('password') passwordField: ElementRef;
-  @ViewChild('showPassword') isShownButton: ElementRef;
-  @ViewChild('privacy') privacy: ElementRef;
-  @ViewChild('age') age: ElementRef;
-  @ViewChild('warning') warning: ElementRef;
-
   public userForm: FormGroup;
   public user: User = new User('', '');
   public isName: boolean;
   public isPass: boolean;
   private isReg: boolean;
   private pass: boolean;
-  public title = 'Warning!';
+
+  public passField: string = 'password';
+  public showPass: string;
+  public title: string;
   public status: string;
+  public titleColor: string;
+  public warning: string;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService) {
     this._createForm();
+  }
+
+  ErrorClass(title = 'Warning', status: string,
+             titleColor = '#ff4848', warning = '10px') {
+    this.title = title;
+    this.status = status;
+    this.titleColor = titleColor;
+    this.warning = warning;
   }
 
   submit(user: User) {
@@ -39,21 +46,21 @@ export class LoginFormComponent implements OnInit, DoCheck {
           this.pass = data.body.pass;
 
           if (this.isReg && this.pass) {
-            location.href = '/'
+            // location.href = '/'
           } else if (this.isReg && !this.pass) {
-            this.warning.nativeElement.style.top = '10px';
-            this.status = 'This password is wrong. Try again';
+            this.ErrorClass(this.title, status = 'This password is wrong. Try again.',
+              this.titleColor, this.warning);
             setTimeout(() => {
-              this.warning.nativeElement.style.top = '-100px';
+              this.warning = '-100px';
             }, 2500)
           }
         },
         error: error => {
           if (error.status === 401) {
-            this.warning.nativeElement.style.top = '10px'
-            this.status = 'This user does not exist';
+            this.ErrorClass(this.title, status = 'This user does not exist',
+              this.titleColor, this.warning);
             setTimeout(() => {
-              this.warning.nativeElement.style.top = '-100px'
+              this.warning = '-100px';
             }, 2500)
           }
         }
@@ -89,24 +96,23 @@ export class LoginFormComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
     if (localStorage.getItem('newUser') === 'true') {
       setTimeout(() => {
-        this.warning.nativeElement.style.top = '10px';
-        this.title = 'Congratulation!';
-        this.status = 'You have been successfully registered';
+        this.ErrorClass(this.title = 'Congratulation!', status = 'You have been successfully registered',
+          this.titleColor = 'whitesmoke', this.warning);
       }, 200);
       setTimeout(() => {
-        this.warning.nativeElement.style.top = '-100px';
+        this.warning = '-100px';
       }, 3000);
     }
     localStorage.clear();
   }
 
   changePasswordInp() {
-    if (this.passwordField.nativeElement.getAttribute('type') === 'password') {
-      this.passwordField.nativeElement.setAttribute('type', 'text');
-      this.isShownButton.nativeElement.style.textDecoration = 'none';
+    if (this.passField === 'password') {
+      this.passField = 'text';
+      this.showPass = 'none';
     } else {
-      this.passwordField.nativeElement.setAttribute('type', 'password');
-      this.isShownButton.nativeElement.style.textDecoration = 'line-through';
+      this.passField = 'password';
+      this.showPass = 'line-through';
     }
   }
 

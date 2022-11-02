@@ -22,12 +22,12 @@
 
     <div class="form__dataBox password">
       <label for="password">Password</label>
-      <input type="password" id="password" #password
+      <input type="password" id="password" [attr.type]="passField"
              placeholder="Password" formControlName="userPassword"
              minlength="8" pattern="[A-Za-z0-9]*"
              [(ngModel)]="user.password">
 
-      <button class="password__visibility" #showPassword
+      <button class="password__visibility" [style.textDecoration]="showPass"
               (click)="changePasswordInp()">Show
       </button>
 
@@ -47,12 +47,12 @@
     <input type="submit" value="Submit"
            id="submitBtn" (click)="checkValid()" >
 
-    <a href="/registration">Not a user?</a>
+    <a routerLink="/registration">Not a user?</a>
   </div>
 
 </div>
 
-<div class="warning" #warning>
-  <h4>{{ this.title }}</h4>
-  <label class="warning__status">{{ this.status }}</label>
+<div class="warning" [style.top]="warning">
+  <h4 [style.color]="titleColor">{{ this.title }}</h4>
+  <label class="warning__status" [style.color]="titleColor">{{ this.status }}</label>
 </div>
