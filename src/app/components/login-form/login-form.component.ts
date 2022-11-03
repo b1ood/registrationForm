@@ -46,7 +46,7 @@ export class LoginFormComponent implements OnInit, DoCheck {
           this.pass = data.body.pass;
 
           if (this.isReg && this.pass) {
-            // location.href = '/'
+            location.href = '/page'
           } else if (this.isReg && !this.pass) {
             this.ErrorClass(this.title, status = 'This password is wrong. Try again.',
               this.titleColor, this.warning);

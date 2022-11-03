@@ -10,14 +10,16 @@ import {HttpClientModule} from "@angular/common/http";
 import {RegFormComponent} from './components/reg-form/reg-form.component';
 import {ColorizeDirective} from './directives/colorize.directive';
 import {PreloaderComponent} from './components/preloader/preloader.component';
+import {UserPageComponent} from './components/user-page/user-page.component';
 import {UserService} from "./components/login-form/userServise/user.service";
+import {UserPageService} from "./components/user-page/userPageService/userPage.service";
 
 const appRoutes: Routes = [
   {path: '', component: LoginFormComponent},
   {path: 'privacy', component: PrivacyComponent},
-  {path: 'registration', component: RegFormComponent}
+  {path: 'registration', component: RegFormComponent},
+  {path: 'page', component: UserPageComponent}
 ];
-
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     LoginFormComponent,
     RegFormComponent,
     ColorizeDirective,
-    PreloaderComponent
+    PreloaderComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, UserPageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
