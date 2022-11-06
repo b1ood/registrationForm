@@ -1,4 +1,5 @@
 export interface WeatherInterface {
+  utc_offset_seconds: number;
   hourly: {
     cloudcover: [0],
     precipitation: [0],

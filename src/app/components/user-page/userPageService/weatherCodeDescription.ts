@@ -1,4 +1,4 @@
-export const WeatherCode =  {
+export const weatherCode = {
   0: 'clearSky',
   1: 'mainlyClear',
   2: 'partlyCloudy',
@@ -24,4 +24,62 @@ export const WeatherCode =  {
   82: 'showersRain',
   85: 'showersShow',
   86: 'showersShow',
+}
+
+export const location = {
+  Moscow: {
+    name: 'Moscow',
+    latitude: '55.7558',
+    longitude: '37.6176'
+  },
+  Berlin: {
+    name: 'Berlin',
+    latitude: '52.5235',
+    longitude: '13.4115'
+  },
+  Paris: {
+    name: 'Paris',
+    latitude: '48.8567',
+    longitude: '2.3510'
+  },
+  London: {
+    name: 'London',
+    latitude: '51.5002',
+    longitude: '-0.1262'
+  },
+  Madrid: {
+    name: 'Madrid',
+    latitude: '40.4167',
+    longitude: '-3.7033'
+  },
+  Vienna: {
+    name: 'Vienna',
+    latitude: '48.2092',
+    longitude: '16.372'
+  },
+  Brussels: {
+    name: 'Brussels',
+    latitude: '50.8371',
+    longitude: '4.3676'
+  },
+  Sofia: {
+    name: 'Sofia',
+    latitude: '42.7105',
+    longitude: '23.3238'
+  },
+  Oslo: {
+    name: 'Oslo',
+    latitude: '59.9138',
+    longitude: '10.7387'
+  },
+  Kiev: {
+    name: 'Kiev',
+    latitude: '50.4422',
+    longitude: '30.5367'
+  },
+  Warsaw: {
+    name: 'Warsaw',
+    latitude: '52.2297',
+    longitude: '21.0122'
+  },
 }

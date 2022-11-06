@@ -29,8 +29,8 @@ export class LoginFormComponent implements OnInit, DoCheck {
     this._createForm();
   }
 
-  ErrorClass(title = 'Warning', status: string,
-             titleColor = '#ff4848', warning = '10px') {
+  private ErrorClass(title = 'Warning', status: string,
+             titleColor = '#ff4848', warning: string) {
     this.title = title;
     this.status = status;
     this.titleColor = titleColor;
@@ -41,7 +41,6 @@ export class LoginFormComponent implements OnInit, DoCheck {
     this.userService.postData(user)
       .subscribe({
         next: (data: any) => {
-          console.log(data)
           this.isReg = data.body.isReg;
           this.pass = data.body.pass;
 
@@ -49,7 +48,7 @@ export class LoginFormComponent implements OnInit, DoCheck {
             location.href = '/page'
           } else if (this.isReg && !this.pass) {
             this.ErrorClass(this.title, status = 'This password is wrong. Try again.',
-              this.titleColor, this.warning);
+              this.titleColor, this.warning = '10px');
             setTimeout(() => {
               this.warning = '-100px';
             }, 2500)
@@ -58,13 +57,16 @@ export class LoginFormComponent implements OnInit, DoCheck {
         error: error => {
           if (error.status === 401) {
             this.ErrorClass(this.title, status = 'This user does not exist',
-              this.titleColor, this.warning);
+              this.titleColor, this.warning = '10px');
             setTimeout(() => {
               this.warning = '-100px';
             }, 2500)
           }
+        },
+        complete: () => {
+
         }
-      });
+      })
   }
 
   public _createForm() {
@@ -97,7 +99,7 @@ export class LoginFormComponent implements OnInit, DoCheck {
     if (localStorage.getItem('newUser') === 'true') {
       setTimeout(() => {
         this.ErrorClass(this.title = 'Congratulation!', status = 'You have been successfully registered',
-          this.titleColor = 'whitesmoke', this.warning);
+          this.titleColor = 'whitesmoke', this.warning = '10px');
       }, 200);
       setTimeout(() => {
         this.warning = '-100px';
