@@ -1,0 +1,28 @@
+<div class="info" [style.opacity]="waitingData">
+  <app-preloader *ngIf="status"></app-preloader>
+  <h4>{{ this.time }}
+    {{ this.date }}</h4>
+  <div class="info__weather">
+    <p>Temperature: {{ this.temp }} <sup>o</sup>C</p>
+    <p>Cloudiness: {{ this.cloudiness }} %</p>
+    <p>Precipitation: {{ this.precipitation }} mm</p>
+    <p>Wind direction: {{ this.windDirection }} </p>
+    <p>Wind speed: {{ this.windSpeed }} m/s</p>
+  </div>
+  <img [src]="weatherCode" alt="weatherStatus" id="weatherIcon">
+  <div class="info__selectLocation">
+    Location: <select id="town" (change)="changeLocation($event)" [disabled]="isDisabled">
+    <option value="Moscow" selected>Moscow</option>
+    <option value="Berlin">Berlin</option>
+    <option value="Paris">Paris</option>
+    <option value="London">London</option>
+    <option value="Madrid">Madrid</option>
+    <option value="Vienna">Vienna</option>
+    <option value="Brussels">Brussels</option>
+    <option value="Sofia">Sofia</option>
+    <option value="Oslo">Oslo</option>
+    <option value="Kiev">Kiev</option>
+    <option value="Warsaw">Warsaw</option>
+  </select>
+  </div>
+</div>
