@@ -23,13 +23,12 @@ export class UserPageComponent implements OnInit {
   public weatherCode: string = '/assets/images/weatherCodes/na.svg';
   public isDisabled = false;
 
-  public isNight: boolean;
+  public isNight = false;
 
   constructor(private userPageService: UserPageService) {
   }
 
   ngOnInit(): void {
-    this.getDate();
     this.getWeather();
   }
 
@@ -46,13 +45,12 @@ export class UserPageComponent implements OnInit {
 
     let hh: string | number = currentDate.getUTCHours() + this.UTC;
     if (hh < 10) hh = '0' + hh;
+    if (hh === 24) hh = 0;
+    this.isNight = hh >= 22 || hh <= 4;
 
     let min: string | number = currentDate.getMinutes();
     if (min < 10) min = '0' + min;
 
-    if (hh <= 22 && hh >= 4) {
-      this.isNight = true;
-    }
     this.date = yy + '.' + mm + '.' + dd;
     this.time = hh + ':' + min;
 
@@ -71,9 +69,10 @@ export class UserPageComponent implements OnInit {
           this.cloudiness = value.hourly.cloudcover[0];
           this.precipitation = value.hourly.precipitation[0];
           this.windSpeed = value.current_weather.windspeed;
-          let direction = value.current_weather.winddirection;
-          let code = value.current_weather.weathercode;
           this.UTC = value.utc_offset_seconds / 3600;
+          const direction = value.current_weather.winddirection;
+          const code = value.current_weather.weathercode;
+          this.getDate();
 
           if (direction <= 22 || direction >= 319) {
             this.windDirection = 'N';
@@ -96,9 +95,9 @@ export class UserPageComponent implements OnInit {
           for (let [key, value] of Object.entries(weatherCode)) {
             if (code === +key) {
               this.weatherCode = '/assets/images/weatherCodes/' + value + '.svg';
-            }
-            if (this.isNight && +key <= 2) {
-              this.weatherCode = '/assets/images/weatherCodes/' + 'night-' + value + '.svg';
+              if (this.isNight && +key <= 2) {
+                this.weatherCode = '/assets/images/weatherCodes/night-' + value + '.svg';
+              }
             }
           }
 
@@ -111,7 +110,7 @@ export class UserPageComponent implements OnInit {
             this.waitingData = '1'
             this.status = false;
             this.isDisabled = false;
-          }, 700)
+          }, 700);
         });
     setTimeout(() => {
       this.getWeather();
