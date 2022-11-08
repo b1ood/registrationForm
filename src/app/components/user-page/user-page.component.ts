@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserPageService} from "./userPageService/userPage.service";
 import {weatherCode} from "./userPageService/weatherCodeDescription";
-import {location} from "./userPageService/weatherCodeDescription";
+import {localCity} from "./userPageService/weatherCodeDescription";
 
 @Component({
   selector: 'app-user-page',
@@ -12,8 +12,8 @@ export class UserPageComponent implements OnInit {
 
   public status = false;
   public waitingData = '1';
-  public date: string;
-  public time: string;
+  public date = '00:00:00';
+  public time = '00:00';
   private UTC = 0;
   public temp: number | string = 'N/A';
   public cloudiness: number | string = 'N/A';
@@ -22,13 +22,14 @@ export class UserPageComponent implements OnInit {
   public windSpeed: number | string = 'N/A';
   public weatherCode: string = '/assets/images/weatherCodes/na.svg';
   public isDisabled = false;
-
   public isNight = false;
+  public userName: string | null = 'user';
 
   constructor(private userPageService: UserPageService) {
   }
 
   ngOnInit(): void {
+    this.userName = sessionStorage.getItem('user');
     this.getWeather();
   }
 
@@ -119,13 +120,21 @@ export class UserPageComponent implements OnInit {
 
   changeLocation(event: any) {
     let selectLocation = event.target.value;
-    for (let i = 0; i < Object.keys(location).length; i++) {
-      if (selectLocation === Object.keys(location)[i]) {
-        this.userPageService.name = Object.values(location)[i].name;
-        this.userPageService.latitude = Object.values(location)[i].latitude;
-        this.userPageService.longitude = Object.values(location)[i].longitude;
+    for (let i = 0; i < Object.keys(localCity).length; i++) {
+      if (selectLocation === Object.keys(localCity)[i]) {
+        this.userPageService.name = Object.values(localCity)[i].name;
+        this.userPageService.latitude = Object.values(localCity)[i].latitude;
+        this.userPageService.longitude = Object.values(localCity)[i].longitude;
         this.getWeather();
       }
     }
   }
+
+  public isShown: boolean;
+  public name: string;
+
+  data(data: any) {
+    this.name = data;
+  }
+
 }

@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UserDataInterface} from "../../../interfaces/userData.interface";
 import {User} from "./user";
-import {Observable, throwError} from "rxjs";
+import {throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 
 @Injectable({
@@ -31,9 +30,5 @@ export class UserService {
         return throwError(err);
       })
     );
-  }
-
-  getUser(user: User): Observable<UserDataInterface[]> {
-    return this.http.get<UserDataInterface[]>('http://localhost:3000/users')
   }
 }

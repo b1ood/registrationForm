@@ -1,0 +1,26 @@
+<div class="dataForm">
+  <h4>Fill in the fields below</h4>
+  <div id="closeModal" (click)="hideDataForm()"></div>
+  <form [formGroup]="personalInfo" (ngSubmit)="addData()">
+    <label for="firstName">Firstname:</label>
+    <input type="text" id="firstName" formControlName="firstName">
+    <label for="lastName">Lastname:</label>
+    <input type="text" id="lastName" formControlName="lastName">
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" formControlName="phoneNumber">
+    <p>Address</p>
+    <div formGroupName="address">
+      <label for="street">Street:</label>
+      <input type="text" id="street" formControlName="street">
+      <label for="city">City:</label>
+      <input type="text" id="city" formControlName="city">
+      <label for="house">House:</label>
+      <input type="text" id="house" formControlName="house">
+      <label for="zip">Zip:</label>
+      <input type="text" id="zip" formControlName="zip">
+    </div>
+    <button>Submit</button>
+    <span>*complete the form to enable button</span>
+  </form>
+</div>
+

@@ -13,6 +13,7 @@ import {PreloaderComponent} from './components/preloader/preloader.component';
 import {UserPageComponent} from './components/user-page/user-page.component';
 import {UserService} from "./components/login-form/userServise/user.service";
 import {UserPageService} from "./components/user-page/userPageService/userPage.service";
+import {UserPageModule} from "./components/user-page/user-page.module";
 
 const appRoutes: Routes = [
   {path: '', component: LoginFormComponent},
@@ -29,14 +30,15 @@ const appRoutes: Routes = [
     RegFormComponent,
     ColorizeDirective,
     PreloaderComponent,
-    UserPageComponent
+    UserPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    UserPageModule
   ],
   providers: [UserService, UserPageService],
   bootstrap: [AppComponent]

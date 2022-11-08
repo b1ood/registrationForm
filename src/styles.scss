@@ -3,6 +3,8 @@
 html{
   background-image: url("/assets/images/bg.jpg");
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
 }
 
 body{

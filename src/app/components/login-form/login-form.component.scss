@@ -41,24 +41,7 @@
     #username, #password {
       width: 220px;
       height: 25px;
-      background: rgba(67, 27, 154, 0.5);
-      border: 0;
-      border-radius: 20px;
-      padding: 2px 10px;
-      color: #00fff7;
-
-      &:focus {
-        outline: none;
-        background: rgba(0, 255, 255, 0.5);
-      }
-
-      &:invalid {
-        color: #ff0000;
-      }
-
-      &::placeholder {
-        color: #00fff7;
-      }
+      @include input;
     }
   }
 

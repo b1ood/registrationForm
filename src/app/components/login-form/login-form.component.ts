@@ -45,6 +45,7 @@ export class LoginFormComponent implements OnInit, DoCheck {
           this.pass = data.body.pass;
 
           if (this.isReg && this.pass) {
+            sessionStorage.setItem('user', this.user.username);
             location.href = '/page'
           } else if (this.isReg && !this.pass) {
             this.ErrorClass(this.title, status = 'This password is wrong. Try again.',
@@ -62,9 +63,6 @@ export class LoginFormComponent implements OnInit, DoCheck {
               this.warning = '-100px';
             }, 2500)
           }
-        },
-        complete: () => {
-
         }
       })
   }

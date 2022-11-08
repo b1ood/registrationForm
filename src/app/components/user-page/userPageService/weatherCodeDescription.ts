@@ -26,7 +26,7 @@ export const weatherCode = {
   86: 'showersShow',
 }
 
-export const location = {
+export const localCity = {
   Moscow: {
     name: 'Moscow',
     latitude: '55.7558',
