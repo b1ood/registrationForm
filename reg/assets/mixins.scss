@@ -1,0 +1,61 @@
+@mixin reset {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin centering {
+  margin: 0 auto;
+  width: max-content;
+  justify-content: space-evenly;
+}
+
+@mixin mainFont {
+  font: small-caps 16px "Ink Free";
+}
+
+@mixin prompt {
+  font: small-caps bold 14px "Ink Free";
+  text-transform: lowercase;
+  color: whitesmoke;
+}
+
+@mixin link {
+  color: #bb86fa;
+  text-decoration: none;
+  text-transform: uppercase;
+  font: small-caps bold 14px "Ink Free";
+
+  &:hover {
+    background-image: linear-gradient(90deg, #ffe600, #ff0000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@mixin blockForm{
+  background: rgba(120, 94, 184, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  color: #ffe600;
+}
+
+@mixin input {
+  background: rgba(67, 27, 154, 0.5);
+  border: 0;
+  border-radius: 20px;
+  padding: 2px 10px;
+  color: #00fff7;
+
+  &:focus {
+    outline: none;
+    background: rgba(0, 255, 255, 0.5);
+  }
+
+  &:invalid {
+    color: #ff0000;
+  }
+
+  &::placeholder {
+    color: #00fff7;
+  }
+}
